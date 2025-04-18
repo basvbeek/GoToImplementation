@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <MSBuildAllProjects Condition="'$(MSBuildVersion)' == '' Or '$(MSBuildVersion)' &lt; '16.0'">$(MSBuildAllProjects);$(MSBuildThisFileFullPath)</MSBuildAllProjects>
+    <HasSharedItems>true</HasSharedItems>
+    <SharedGUID>a369d5dd-c93a-4822-a1bc-2c1e4c8f188d</SharedGUID>
+  </PropertyGroup>
+  <PropertyGroup Label="Configuration">
+    <Import_RootNamespace>GoToImplementation.Shared</Import_RootNamespace>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="$(MSBuildThisFileDirectory)UnderlineClassifierProvider.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Extensions\MouseEventArgsExtensions.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)GoToImplementationPackage.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ModifierKeyProcessor.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ModifierKeyProcessorProvider.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ModifierKeys.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ModifierKeysState.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)GotToImplementationMouseProcessor.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)GotToImplementationMouseProcessorProvider.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)UnderlineClassifier.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)UnderlineFormatDefinition.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="$(MSBuildThisFileDirectory)Directory.Build.props" />
+  </ItemGroup>
+</Project>

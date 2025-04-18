@@ -1,0 +1,34 @@
+name: Build extension
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+jobs:
+  build:
+    runs-on: windows-latest
+    steps:
+      - name: Checkout the code
+        uses: actions/checkout@v2
+      - name: Add nuget to PATH
+        uses: nuget/setup-nuget@v1
+      - name: Add msbuild to PATH
+        uses: microsoft/setup-msbuild@v1.0.2
+      - name: Update version
+        run: |
+          (Get-Content -Path src\GoToImplementation\source.extension.vsixmanifest) |
+            ForEach-Object {$_ -Replace '1.0.0', '1.0.${{ github.run_number }}'} |
+              Set-Content -Path src\GoToImplementation\source.extension.vsixmanifest
+          (Get-Content -Path src\GoToImplementation\Properties\AssemblyInfo.cs) |
+            ForEach-Object {$_ -Replace '1.0.0', '1.0.${{ github.run_number }}'} |
+              Set-Content -Path src\GoToImplementation\Properties\AssemblyInfo.cs
+      - name: Restore
+        run: nuget restore
+      - name: Build
+        run: msbuild /p:configuration=Release /p:DeployExtension=false /p:ZipPackageCompressionLevel=normal
+      - uses: actions/upload-artifact@v4
+        with:
+          name: GoToImplementation.vsix
+          path: src\GoToImplementation\bin\Release\GoToImplementation.vsix
